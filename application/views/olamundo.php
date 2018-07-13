@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php echo $mensagem ?></title>
+	<title> <?php echo $mensagem ?></title>
 </head>
 <body>
-	<?php echo $mensagem ?>
+	<h1><?php echo $mensagem ?></h1>
 </body>
-</html>
+</html> 

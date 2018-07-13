@@ -1,4 +1,4 @@
-            <!-- Blog Sidebar Widgets Column -->
+ <!-- Blog Sidebar Widgets Column -->
             <div class="col-md-4">
 
                 <!-- Blog Search Well -->
