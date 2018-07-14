@@ -7,8 +7,8 @@
             <div class="col-md-8">
 
                 <h1 class="page-header">
-                    Página Inicial -
-                    <small>Postagens Recentes</small>
+                    <?php echo $titulo ?>
+                    <small>> <?php echo $subtitulo ?></small>
                 </h1>
 
                 <?php
