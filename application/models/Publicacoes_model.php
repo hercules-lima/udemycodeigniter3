@@ -18,9 +18,14 @@ class Publicacoes_model extends CI_Model {
 	}
 
 	public function destaques_home(){
+		$this->db->select('usuario.id as idautor,
+		usuario.nome, postagens.id,postagens.titulo,postagens.subtitulo,
+		postagens.user,postagens.data,postagens.img');
+		$this->db->from('postagens');
+		$this->db->join('usuario','usuario.id = postagens.user');
 		$this->db->limit(4);
-		$this->db->order_by('data','DESC');
-		return $this->db->get('postagens')->result();
+		$this->db->order_by('postagens.data','DESC');
+		return $this->db->get()->result();
 	}
 
 }
