@@ -22,4 +22,11 @@ class Usuarios_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+	public function listar_autores(){
+		$this->db->select('id,nome,img');
+		$this->db->from('usuario');
+		$this->db->order_by('nome','ASC');
+		return $this->db->get()->result();
+	}
+
 }

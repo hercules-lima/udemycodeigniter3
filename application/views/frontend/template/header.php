@@ -29,7 +29,7 @@
                       </ul>
                     </li>
                     <li>
-                        <a href="#">Sobre Nós</a>
+                        <a href="<?php echo base_url('sobrenos')?>">Sobre Nós</a>
                     </li>
                     <li>
                         <a href="#">Contato</a>
