@@ -20,6 +20,7 @@ class Categorias extends CI_Controller {
 
 		$dados['titulo']= 'Categorias';
 		$dados['subtitulo']= '';
+		$dados['subtitulodb']= $this->modelcategorias->listar_titulos($id);
 
 		$this->load->view('frontend/template/html-header',$dados);
 		$this->load->view('frontend/template/header');
