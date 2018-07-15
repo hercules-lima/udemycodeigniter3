@@ -39,4 +39,21 @@ class Publicacoes_model extends CI_Model {
 		return $this->db->get()->result();
 	}
 
+		public function publicacao($id){
+		$this->db->select('usuario.id as idautor,
+		usuario.nome, postagens.id,postagens.titulo,postagens.subtitulo,
+		postagens.user,postagens.data,postagens.img,postagens.categoria,postagens.conteudo');
+		$this->db->from('postagens');
+		$this->db->join('usuario','usuario.id = postagens.user');
+		$this->db->where('postagens.id ='.$id);
+		return $this->db->get()->result();
+	}
+
+		public function listar_titulos($id){
+		$this->db->select('id,titulo');
+		$this->db->from('postagens');
+		$this->db->where('id ='.$id);
+		return $this->db->get()->result();
+	}
+
 }
