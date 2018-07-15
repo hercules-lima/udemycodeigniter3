@@ -5,10 +5,14 @@ class Categoria extends CI_Controller {
 
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('categorias_model','modelcategorias');
+		$this->categorias = $this->modelcategorias->listar_categorias();
 	}
 
 	public function index()
 	{	
+		$this->load->library('table');
+		$dados['categorias'] = $this->categorias;
 		//Dados a serem enviados para o Cabeçalho
 
 		$dados['titulo']= 'Painel de Controle';
