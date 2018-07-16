@@ -50,7 +50,7 @@
                                        foreach ($categorias as $categoria) {
                                            $nomecat=$categoria->titulo;
                                            $alterar= anchor(base_url('admin/categoria'),'<i class="fa fa-refresh fa-fw"></i> Alterar');
-                                           $excluir= anchor(base_url('admin/categoria'),'<i class="fa fa-remove fa-fw"></i> Excluir');
+                                           $excluir= anchor(base_url('admin/categoria/excluir/'.md5($categoria->id)),'<i class="fa fa-remove fa-fw"></i> Excluir');
 
                                            $this->table->add_row($nomecat,$alterar,$excluir);
                                        }
