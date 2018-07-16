@@ -23,4 +23,19 @@ class Categoria extends CI_Controller {
 		$this->load->view('backend/categoria');
 		$this->load->view('backend/template/html-footer');
 	}
+
+	public function inserir(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('txt-categoria','Nome da Categoria','required|min_length[3]|is_unique[categoria.titulo]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}else{
+			$titulo=$this->input->post('txt-categoria');
+			if($this->modelcategorias->adicionar($titulo)){
+				redirect(base_url('admin/categoria'));
+			}else{
+				echo "Houve um erro no sistema!";
+			}
+		}
+	}
 }
