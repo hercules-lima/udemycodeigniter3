@@ -15,7 +15,7 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h2>Bem Vindo ao Sistema!</h2>
+                                    <h2>Bem Vindo ao Sistema <?php echo $this->session->userdata('userlogado')->nome;?></h2>
                                 </div>
                                 
                             </div>
