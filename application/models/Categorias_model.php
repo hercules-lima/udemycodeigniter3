@@ -31,4 +31,16 @@ class Categorias_model extends CI_Model {
 		return $this->db->delete('categoria');
 	}
 
+		public function listar_categoria($id){
+		$this->db->from('categoria');
+		$this->db->where('md5(id)',$id);
+		return $this->db->get()->result();
+	}
+
+	public function altera($titulo,$id){
+		$dados['titulo'] = $titulo;
+		$this->db->where('id',$id);
+		return $this->db->update('categoria',$dados);
+	}
+
 }

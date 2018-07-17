@@ -47,4 +47,34 @@ class Categoria extends CI_Controller {
 			echo "Houve um erro no sistema!";
 		}
 	}
+
+	public function alterar($id){
+		$this->load->library('table');
+		$dados['categorias'] = $this->modelcategorias->listar_categoria($id);
+		//Dados a serem enviados para o Cabeçalho
+
+		$dados['titulo']= 'Painel de Controle';
+		$dados['subtitulo']= 'Categoria';
+
+		$this->load->view('backend/template/html-header',$dados);
+		$this->load->view('backend/template/template');
+		$this->load->view('backend/alterar-categoria');
+		$this->load->view('backend/template/html-footer');
+	}
+
+	public function salvar_alteracoes(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('txt-categoria','Nome da Categoria','required|min_length[3]|is_unique[categoria.titulo]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}else{
+			$titulo=$this->input->post('txt-categoria');
+			$id= $this->input->post('txt-id');
+			if($this->modelcategorias->altera($titulo,$id)){
+				redirect(base_url('admin/categoria'));
+			}else{
+				echo "Houve um erro no sistema!";
+			}
+		}
+	}
 }
