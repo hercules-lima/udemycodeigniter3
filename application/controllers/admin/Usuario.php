@@ -9,14 +9,20 @@ class Usuario extends CI_Controller {
 
 	public function index()
 	{	
-		//Dados a serem enviados para o Cabeçalho
+		if(!$this->session->userdata('logado')){
+			redirect(base_url('admin/login'));
+		}
 
+		$this->load->library('table');
+		$this->load->model('usuarios_model','modelusuarios');
+		$dados['usuario']=$this->modelusuarios->listar_autores();
+		//Dados a serem enviados para o Cabeçalho
 		$dados['titulo']= 'Painel de Controle';
-		$dados['subtitulo']= 'Home';
+		$dados['subtitulo']= 'Usuários';
 
 		$this->load->view('backend/template/html-header',$dados);
 		$this->load->view('backend/template/template');
-		$this->load->view('backend/home');
+		$this->load->view('backend/usuario');
 		$this->load->view('backend/template/html-footer');
 	}
 
