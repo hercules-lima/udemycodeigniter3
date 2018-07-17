@@ -26,6 +26,87 @@ class Usuario extends CI_Controller {
 		$this->load->view('backend/template/html-footer');
 	}
 
+
+	public function inserir(){
+			if(!$this->session->userdata('logado')){
+			redirect(base_url('admin/login'));
+		}
+		$this->load->model('usuarios_model','modelusuarios');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('txt-nome','Nome do Usuário','required|min_length[3]');
+		$this->form_validation->set_rules('txt-email','Email','required|valid_email');
+		$this->form_validation->set_rules('txt-historico','Histórico','required|min_length[20]');
+		$this->form_validation->set_rules('txt-user','User','required|min_length[3]|is_unique[usuario.user]');
+		$this->form_validation->set_rules('txt-senha','Senha','required|min_length[3]');
+		$this->form_validation->set_rules('txt-confir-senha','Confirmar Senha','required|matches[txt-senha]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}else{
+			$nome=$this->input->post('txt-nome');
+			$email=$this->input->post('txt-email');
+			$historico=$this->input->post('txt-historico');
+			$user=$this->input->post('txt-user');
+			$senha=$this->input->post('txt-senha');
+			if($this->modelusuarios->adicionar($nome,$email,$historico,$user,$senha)){
+				redirect(base_url('admin/usuario'));
+			}else{
+				echo "Houve um erro no sistema!";
+			}
+		}
+	}
+
+	public function excluir($id){
+			if(!$this->session->userdata('logado')){
+			redirect(base_url('admin/login'));
+		}
+
+		$this->load->model('usuarios_model','modelusuarios');
+
+		if($this->modelusuarios->excluir($id)){
+			redirect(base_url('admin/usuario'));
+		}else{
+			echo "Houve um erro no sistema!";
+		}
+	}
+
+	public function alterar($id){
+			if(!$this->session->userdata('logado')){
+			redirect(base_url('admin/login'));
+		}
+		$this->load->model('usuarios_model','modelusuarios');
+		$this->load->library('table');
+		$dados['categorias'] = $this->modelcategorias->listar_categoria($id);
+		//Dados a serem enviados para o Cabeçalho
+
+		$dados['titulo']= 'Painel de Controle';
+		$dados['subtitulo']= 'Categoria';
+
+		$this->load->view('backend/template/html-header',$dados);
+		$this->load->view('backend/template/template');
+		$this->load->view('backend/alterar-categoria');
+		$this->load->view('backend/template/html-footer');
+	}
+
+	public function salvar_alteracoes(){
+				if(!$this->session->userdata('logado')){
+			redirect(base_url('admin/login'));
+		}
+		$this->load->model('usuarios_model','modelusuarios');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('txt-categoria','Nome da Categoria','required|min_length[3]|is_unique[categoria.titulo]');
+		if($this->form_validation->run() == FALSE){
+			$this->index();
+		}else{
+			$titulo=$this->input->post('txt-categoria');
+			$id= $this->input->post('txt-id');
+			if($this->modelcategorias->altera($titulo,$id)){
+				redirect(base_url('admin/categoria'));
+			}else{
+				echo "Houve um erro no sistema!";
+			}
+		}
+	}
+
 	public function pag_login(){
 				//Dados a serem enviados para o Cabeçalho
 
@@ -47,7 +128,7 @@ class Usuario extends CI_Controller {
 			$usuario = $this->input->post('txt-user');	
 			$senha = $this->input->post('txt-senha');
 			$this->db->where('user',$usuario);	
-			$this->db->where('senha',$senha);	
+			$this->db->where('senha',md5($senha));	
 			$userlogado = $this->db->get('usuario')->result();
 			if(count($userlogado)==1){
 				$dadosSessao['userlogado'] = $userlogado[0];

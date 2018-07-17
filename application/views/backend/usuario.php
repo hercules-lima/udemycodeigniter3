@@ -21,20 +21,20 @@
                                    ?> 
                                      <div class="form-group">
                                             <label id="txt-nome">Nome do Usuário</label>
-                                            <input type="text" id="txt-nome" name="txt-nome" class="form-control" placeholder="Digite o nome do Usuário...">
+                                            <input type="text" id="txt-nome" name="txt-nome" class="form-control" placeholder="Digite o nome do Usuário..." value="<?php echo set_value('txt-nome')?>">
                                         </div>
                                       <div class="form-group">
                                             <label id="txt-email">Email</label>
-                                            <input type="text" id="txt-email" name="txt-email" class="form-control" placeholder="Digite o email do Usuário...">
+                                            <input type="text" id="txt-email" name="txt-email" class="form-control" placeholder="Digite o email do Usuário..." value="<?php echo set_value('txt-email')?>">
                                         </div>
                                         <div class="form-group">
                                             <label id="txt-historico">Histórico</label>
-                                            <textarea id="txt-historico" name="txt-historico" class="form-control"></textarea>
+                                            <textarea id="txt-historico" name="txt-historico" class="form-control"><?php echo set_value('txt-historico')?></textarea>
                                         </div>
 
                                          <div class="form-group">
                                             <label id="txt-user">User</label>
-                                            <input type="text" id="txt-user" name="txt-user" class="form-control" placeholder="Digite o user do Usuário...">
+                                            <input type="text" id="txt-user" name="txt-user" class="form-control" placeholder="Digite o user do Usuário..." value="<?php echo set_value('txt-user')?>">
                                         </div>
 
                                          <div class="form-group">
